@@ -1,0 +1,35 @@
+// Standard resets
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+// Color palette
+$primary-color: #272727;
+$secondary-color: #FAB57A;
+$ternary-color: #362222;
+$neutral-color: #FFEDDB;
+$background-color: #EEEEEE;
+
+// ===================
+// MIXINS
+// ===================
+
+// Mixin: Slow ease of half a second
+@mixin transition-ease {
+    transition: all 0.5s ease-in-out;
+}
+
+// Function: Generate an appropriate color for text
+@function set-text-color($color) {
+
+    // If background color is light (lightness is higher than 40%)
+    // return a dark font. Alternatively, return a light font.
+    @if (lightness($color) > 40%) {
+        @return black;
+    }
+    @else {
+        @return white;
+    }
+}

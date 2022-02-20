@@ -1,0 +1,83 @@
+<!-- Load static directory files -->
+{% load static %}
+{% load sass_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Manager</title>
+
+    <!-- 
+        Stylesheets:
+        1. Bootstrap (Siempre ir primero para poder ser sobre-escrito por custom stylesheets)
+        2. FontAwesome Versión 5.13.0
+        3. Custom Style Sheet
+    -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css">
+    <link rel="stylesheet" href="{% sass_src 'recipe_book/scss/main.scss' %}">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;700;900&family=Ubuntu:wght@300;500&display=swap" rel="stylesheet">
+
+    <!-- Scripts -->
+    <!-- - FontAwesome -->
+    <script src="https://kit.fontawesome.com/faab1bd6e3.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="nav">
+
+        <!-- App Title -->
+        <h1 class="brand-logo">
+            <a href="{% url 'book-home' %}">Thyme</a>
+            <i class="fab fa-pagelines"></i>
+        </h1>
+
+        <!-- Menu Items -->
+        <ul class="menu-nav">
+            
+            <li class="menu-nav__item">
+                <a href="#" class="menu-nav__link">About</a>
+            </li>
+            <li class="menu-nav__item">
+                <a href="#" class="menu-nav__link">Ingredients</a>
+            </li>
+            <li class="menu-nav__item">
+                <a href="#" class="menu-nav__link">Recipes</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <section id="content" class="container">
+
+        <!-- Page content -->
+        {% block content %}{% endblock %}
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Apicbase&trade; Fullstack Submission</p>
+        <p>&copy; Eduardo Santizo 2022</p>
+    </footer>
+
+    <!-- Javascript -->
+    <!-- 1. Bootstrap Bundle with Popper -->
+    <!-- 2. FontAwesome -->
+    <!-- 3. Custom javascript file -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"></script>
+    <script src="{% static 'recipe_book/js/base.js' %}"></script>
+
+</body>
+
+</html>

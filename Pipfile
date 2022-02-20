@@ -5,6 +5,9 @@ name = "pypi"
 
 [packages]
 django = "*"
+python-dotenv = "*"
+libsass = "*"
+django-sass-processor = "*"
 
 [dev-packages]
 

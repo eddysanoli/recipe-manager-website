@@ -1,0 +1,67 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0; }
+
+.nav {
+  top: 0;
+  left: 0;
+  width: 100vw;
+  background: #272727;
+  box-shadow: 0 3px 25px 5px #bbbbbb;
+  opacity: 0.98;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  margin-bottom: 5%; }
+  .nav .brand-logo {
+    font-size: 2.5rem;
+    font-weight: 500;
+    font-family: "Ubuntu";
+    color: white;
+    padding: 2rem; }
+  .nav .fa-pagelines {
+    margin-left: -1rem;
+    color: #FAB57A; }
+  .nav .menu-nav {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    overflow: hidden;
+    list-style-type: none;
+    padding-right: 1rem; }
+    .nav .menu-nav__link {
+      display: inline-block;
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      font-weight: 300;
+      padding: 2rem 1.5rem;
+      transition: all 0.5s ease-in-out; }
+      .nav .menu-nav__link:hover {
+        color: #FAB57A; }
+
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 5rem;
+  overflow: hidden;
+  background: #272727;
+  color: white;
+  box-shadow: 0 -3px 0px 8px #FAB57A;
+  text-align: right;
+  line-height: 0.6;
+  padding: 1.5rem;
+  margin-top: 5%; }
+
+a {
+  color: white;
+  text-decoration: none; }
+
+body {
+  background-color: #FFEDDB;
+  color: black; }
+
+/*# sourceMappingURL=main.css.map */

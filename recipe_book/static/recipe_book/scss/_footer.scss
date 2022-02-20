@@ -1,0 +1,26 @@
+footer {
+
+    // Positioning
+    position: absolute; 
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    // Sizing
+    height: 5rem;
+    overflow: hidden;
+
+    // Color
+    background: $primary-color;
+    color: set-text-color($primary-color);
+    box-shadow: 0 -3px 0px 8px $secondary-color;       // Line on top
+
+    // Text properties
+    text-align: right;
+    line-height: 0.6;
+
+    // Padding and margin
+    padding: 1.5rem;
+    margin-top: 5%;
+    
+}

@@ -1,0 +1,78 @@
+.nav {
+
+    // Dimensions
+    // position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+
+    // Color and Opacity
+    background: $primary-color;
+    box-shadow: 0 3px 25px 5px rgb(187, 187, 187);
+    opacity: 0.98;
+
+    // Flex settings
+    display: flex;
+    justify-content: space-between;
+    align-items: center;                    // Align vertically
+    flex-direction: row;
+
+    // Margin and padding
+    margin-bottom: 5%;
+
+    // ===================
+    // Brand Logo
+
+    .brand-logo {
+        font-size: 2.5rem;
+        font-weight: 500;
+        font-family: "Ubuntu";
+        color: set-text-color($primary-color);
+        padding: 2rem;
+    }
+
+    .fa-pagelines {
+        margin-left: -1rem;
+        color: #FAB57A;
+    }
+
+    // ===================
+    // Menu Elements
+    .menu-nav {
+
+        // Flex settings
+        display: flex;
+        flex-flow: row nowrap;       // Wrap around if device has weird width
+        align-items: center;
+
+        overflow: hidden;
+        
+        // Remove default list styles
+        list-style-type: none;
+
+        // Padding and margin
+        padding-right: 1rem;
+
+        // ===================
+        // Menu Links
+        &__link {
+
+            // Display
+            display: inline-block;
+
+            // Font Settings
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            font-weight: 300;
+
+            // Padding
+            padding: 2rem 1.5rem;
+
+            // Hover animation
+            @include transition-ease;
+            &:hover {
+                color: $secondary-color;
+            }
+        }
+    }
+}
