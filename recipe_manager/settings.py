@@ -33,6 +33,7 @@ ALLOWED_HOSTS = [
 INSTALLED_APPS = [
     'recipe_book.apps.RecipeBookConfig',
     'sass_processor',
+    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -132,9 +133,28 @@ STATICFILES_FINDERS = [
     'sass_processor.finders.CssFinder',
 ]
 
-
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+# =====================
+# Crispy Forms
+
+# Tell crispy forms which template to use
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+# =====================
+# Media
+
+# Directory where the uploaded files will be saved
+# (Profile_pics directory will be added inside media)
+#   - BASE_DIR: Variable at the top of the settings file for projects directory
+#   - 'media': Folder inside the base directory
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Public URL for the media route
+MEDIA_URL = '/media/'
+

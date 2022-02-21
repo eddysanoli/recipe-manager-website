@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import Recipe, Ingredient
 
-# Register your models here.
+# Add models to admin page
+admin.site.register(Recipe)
+admin.site.register(Ingredient)

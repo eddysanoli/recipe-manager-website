@@ -1,3 +1,4 @@
 ﻿Apicbase Full Stack Assignment.pdf
 recipe_manager/.env
 db.sqlite3
+recipe_manager/__pycache__

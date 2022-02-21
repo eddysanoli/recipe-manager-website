@@ -18,7 +18,7 @@ $background-color: #EEEEEE;
 
 // Mixin: Slow ease of half a second
 @mixin transition-ease {
-    transition: all 0.5s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
 // Function: Generate an appropriate color for text

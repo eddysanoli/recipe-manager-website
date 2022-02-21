@@ -6,7 +6,6 @@
 .nav {
   top: 0;
   left: 0;
-  width: 100vw;
   background: #272727;
   box-shadow: 0 3px 25px 5px #bbbbbb;
   opacity: 0.98;
@@ -37,15 +36,11 @@
       text-transform: uppercase;
       font-weight: 300;
       padding: 2rem 1.5rem;
-      transition: all 0.5s ease-in-out; }
+      transition: all 0.3s ease-in-out; }
       .nav .menu-nav__link:hover {
         color: #FAB57A; }
 
 footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
   height: 5rem;
   overflow: hidden;
   background: #272727;
@@ -56,12 +51,54 @@ footer {
   padding: 1.5rem;
   margin-top: 5%; }
 
+.ingredient-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-content: center;
+  text-align: center;
+  margin: 3% 0; }
+  .ingredient-list .ingredient-element {
+    min-width: 200px;
+    max-width: 350px;
+    border-radius: 20px;
+    background-color: #FAB57A;
+    box-shadow: 2px 2px 10px 3px #cfcfcf;
+    color: black;
+    padding: 2rem 2rem;
+    margin: 3%; }
+    .ingredient-list .ingredient-element h2 {
+      margin-bottom: -0.3rem; }
+    .ingredient-list .ingredient-element .ingredient-element__img {
+      background-color: #FFEDDB;
+      border-radius: 20px 20px 0 0;
+      margin: -8% -8% 25px -8%; }
+      .ingredient-list .ingredient-element .ingredient-element__img img {
+        aspect-ratio: 1;
+        width: 70%;
+        border-radius: 100%;
+        box-shadow: 2px 2px 10px 3px rgba(46, 46, 46, 0.541);
+        margin: 20px; }
+    .ingredient-list .ingredient-element p {
+      margin-top: 15px;
+      text-align: justify; }
+    .ingredient-list .ingredient-element hr {
+      height: 2px; }
+
 a {
   color: white;
   text-decoration: none; }
 
 body {
-  background-color: #FFEDDB;
+  background-color: #EEEEEE;
   color: black; }
+
+.flex-wrapper {
+  display: flex;
+  min-height: 100vh;
+  max-width: 100vw;
+  flex-direction: column;
+  justify-content: space-between; }
 
 /*# sourceMappingURL=main.css.map */

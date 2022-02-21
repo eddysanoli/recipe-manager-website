@@ -8,6 +8,8 @@ django = "*"
 python-dotenv = "*"
 libsass = "*"
 django-sass-processor = "*"
+pillow = "*"
+django-crispy-forms = "*"
 
 [dev-packages]
 

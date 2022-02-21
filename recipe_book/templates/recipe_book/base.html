@@ -8,7 +8,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recipe Manager</title>
+    <link rel="shortcut icon" href="{%  static 'recipe_book/favicon.ico' %}">
+    <title>Thyme: Recipe Manager</title>
 
     <!-- 
         Stylesheets:
@@ -30,6 +31,7 @@
     <script src="https://kit.fontawesome.com/faab1bd6e3.js" crossorigin="anonymous"></script>
 
 </head>
+
 <body>
 
     <!-- Navigation Bar -->
@@ -53,22 +55,33 @@
             <li class="menu-nav__item">
                 <a href="#" class="menu-nav__link">Recipes</a>
             </li>
+            <li class="menu-nav__item">
+                <a href="#" class="menu-nav__link">Login</a>
+            </li>
+            <li class="menu-nav__item">
+                <a href="#" class="menu-nav__link">Register</a>
+            </li>
         </ul>
     </nav>
 
-    <!-- Main Content -->
-    <section id="content" class="container">
+    <!-- Flex-wrapper: Class to always keep the navbar at the top and the -->
+    <!-- footer at the bottom of the page, no matter the size of the content -->    
+    <div class="flex-wrapper">
 
-        <!-- Page content -->
-        {% block content %}{% endblock %}
+        <!-- Main Content -->
+        <section id="content" class="container">
 
-    </section>
+            <!-- Page content -->
+            {% block content %}{% endblock %}
 
-    <!-- Footer -->
-    <footer>
-        <p>Apicbase&trade; Fullstack Submission</p>
-        <p>&copy; Eduardo Santizo 2022</p>
-    </footer>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>Apicbase&trade; Fullstack Submission</p>
+            <p>&copy; Eduardo Santizo 2022</p>
+        </footer>
+    </div>
 
     <!-- Javascript -->
     <!-- 1. Bootstrap Bundle with Popper -->

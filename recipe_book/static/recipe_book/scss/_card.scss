@@ -1,0 +1,73 @@
+// Variables
+$card-radius: 20px;
+
+// Ingredient List
+.ingredient-list {
+
+    // Flex settings
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-content: center;
+
+    // Alignment of content
+    text-align: center;
+
+    // Padding and margin
+    margin: 3% 0;
+
+    .ingredient-element {
+
+        // Dimensions
+        min-width: 200px;
+        max-width: 350px;
+        border-radius: $card-radius;
+
+        // Color
+        background-color: $secondary-color;
+        box-shadow: 2px 2px 10px 3px rgb(207, 207, 207);
+        color: set-text-color($secondary-color);
+
+        // Margin and padding
+        padding: 2rem 2rem;
+        margin: 3%;
+
+        // Title
+        h2 {
+            margin-bottom: -0.3rem;
+        }
+
+        // Image
+        .ingredient-element__img {
+
+            background-color: $neutral-color;
+            border-radius: $card-radius $card-radius 0 0;
+            margin: -8% -8% 25px -8%;
+
+            img {
+                aspect-ratio: 1;
+                width: 70%;
+                border-radius: 100%;
+                box-shadow: 2px 2px 10px 3px rgba(46, 46, 46, 0.541);
+                margin: 20px;
+            }
+    
+        }
+        
+        // Description
+        p {
+            margin-top: 15px;
+            text-align: justify;
+        }
+
+        // Separator line
+        hr {
+            height: 2px;
+        }
+
+    }
+
+    
+
+}
