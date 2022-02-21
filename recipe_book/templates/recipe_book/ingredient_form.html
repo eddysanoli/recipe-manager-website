@@ -3,11 +3,11 @@
 
 {% block content %}
 
-    <!-- 
-        NOTE: The form that will be passed to the template by default will be passed
-        as "form" so no further changes are required
-    -->
-    <form method="POST">
+    <!-- NOTE: Context object name = "form" -->
+
+    <!-- Add an encoding type to also save images onto the model -->
+    <form method="POST"  enctype="multipart/form-data">
+
         <!-- Make sure to add a CSRF token to prevent the POST -->
         <!-- request from being intercepted by an attacker -->
         {% csrf_token %}

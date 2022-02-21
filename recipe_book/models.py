@@ -42,7 +42,7 @@ class Ingredient(models.Model):
 
     # Where a user should be redirected after a post
     def get_absolute_url(self):
-        return reverse('ingredient-detail', kwargs={'pk': self.article_id})
+        return reverse('ingredient-detail', kwargs={})
 
 
 # =====================
@@ -85,4 +85,4 @@ class Recipe(models.Model):
 
     # Where a user should be redirected after a post
     def get_absolute_url(self):
-        return reverse('recipe-detail', kwargs={'pk': self.recipe_id})
+        return reverse('recipe-detail', kwargs={})
