@@ -3,7 +3,10 @@
 
 {% block content %}
 
-    <h1>Ingredients</h1>
+    <h1 class="content-title">Ingredients</h1>
+
+    <!-- Create new ingredient button -->
+    <a type="button" class="btn btn-outline-dark" href="{% url 'ingredient-create' %}"><i class="fa-solid fa-circle-plus"></i> ADD INGREDIENT</a>
 
     <div class="ingredient-list">
 
@@ -22,6 +25,13 @@
                 <small>Unit Price: ${{ ingredient.unit_cost }} / {{ ingredient.unit }}</small>
                 <hr>
                 <p>{{ ingredient.description }}</p>
+
+                <!-- Edit and delete buttons -->
+                <div class="ingredient-element__btn">
+                    <a href="{% url 'ingredient-delete' ingredient.article_id %}"><i class="fa-solid fa-trash"></i></a>
+                    <a href="{% url 'ingredient-update' ingredient.article_id %}"><i class="fa-solid fa-pen-to-square"></i></a>
+                </div>
+                
             </div>
 
         {% endfor %}

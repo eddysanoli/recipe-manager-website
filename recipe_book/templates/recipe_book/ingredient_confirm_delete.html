@@ -1,0 +1,25 @@
+{% extends "recipe_book/base.html" %}
+{% block content %}
+
+    <!-- NOTE: The ingredient object will be passed as "ingredient" -->
+    <div class="content-section">
+
+        <form method="POST">
+
+            <!-- CSRF token to prevent request interception -->
+            {% csrf_token %}
+
+            <!-- Display the entire form -->
+            <fieldset class="form-group">
+                <h3>Are you sure you want to delete the ingredient "{{ ingredient.name }}"?</h3>
+            </fieldset>
+
+            <!-- Delete / Cancel Buttons -->
+            <div class="form-group">
+                <button class="btn btn-outline-danger" type="submit">Delete</button>
+                <a class="btn btn-outline-secondary" href="{% url 'ingredient-list' %}">Cancel</a>
+            </div>
+        </form>
+    </div>
+
+{% endblock content %}

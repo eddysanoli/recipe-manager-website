@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'recipe_book.apps.RecipeBookConfig',
     'sass_processor',
     'crispy_forms',
+    "crispy_bootstrap5",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -143,7 +144,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # =====================
 # Crispy Forms
 
-# Tell crispy forms which template to use
+# Tell crispy forms to use bootstrap 5
+# https://github.com/django-crispy-forms/crispy-bootstrap5
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 # =====================

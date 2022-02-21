@@ -1,0 +1,30 @@
+{% extends "recipe_book/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <!-- 
+        NOTE: The form that will be passed to the template by default will be passed
+        as "form" so no further changes are required
+    -->
+    <form method="POST">
+        <!-- Make sure to add a CSRF token to prevent the POST -->
+        <!-- request from being intercepted by an attacker -->
+        {% csrf_token %}
+
+        <!-- Display the entire form -->
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Create New Ingredient</legend>
+            
+            <!-- Use the vertical bar to set a filter -->
+            {{ form|crispy }}
+        </fieldset>
+
+        <!-- Submit button -->
+        <!-- (Elements use bootstrap pre-defined classes) -->
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Save</button>
+        </div>
+    </form>
+
+{% endblock content %}

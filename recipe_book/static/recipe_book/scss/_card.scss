@@ -54,6 +54,45 @@ $card-radius: 20px;
             }
     
         }
+
+        // Delete and edit buttons
+        .ingredient-element__btn {
+
+            // Flex settings
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            align-items: flex-end;
+
+            // Space on top of both card buttons
+            margin-top: 30px;
+
+            // Link
+            a { 
+                // Color and dimensions
+                background-color: $primary-color;
+                border-radius: 100%;
+                height: 40px;
+                width: 40px;
+
+                // Space between buttons
+                margin-left: 15px;
+
+                @include transition-ease;
+                &:hover {
+                    background-color: rgba(46, 46, 46, 0.836); 
+                }
+
+                // Center icons inside circles vertically
+                i { margin-top: 11px; }
+            }
+
+            // Disable hover coloring on icons
+            a:hover {
+                color: set-text-color($primary-color);
+            }
+
+        }
         
         // Description
         p {

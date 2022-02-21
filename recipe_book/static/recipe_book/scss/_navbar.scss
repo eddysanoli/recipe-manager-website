@@ -28,6 +28,18 @@
         font-family: "Ubuntu";
         color: set-text-color($primary-color);
         padding: 2rem;
+
+        // Disable hover coloring on logo
+        a:hover {
+            color: set-text-color($primary-color);
+        }
+
+        // Move rotate icon on hover
+        i:hover {
+            transition: all 0.5s ease-in;
+            transform: rotate(10deg);
+        }
+
     }
 
     .fa-pagelines {

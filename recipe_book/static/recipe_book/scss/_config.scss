@@ -16,7 +16,7 @@ $background-color: #EEEEEE;
 // MIXINS
 // ===================
 
-// Mixin: Slow ease of half a second
+// Mixin: Fast ease of one third of a second
 @mixin transition-ease {
     transition: all 0.3s ease-in-out;
 }
