@@ -2,6 +2,7 @@
 @import 'navbar';
 @import 'footer';
 @import 'card';
+@import 'about';
 
 a {
     color: set-text-color($primary-color);
@@ -11,6 +12,10 @@ a {
 body {
     background-color: $background-color;
     color: set-text-color($background-color);
+}
+
+.content-title {
+    margin-bottom: 40px;
 }
 
 .flex-wrapper {

@@ -1,0 +1,31 @@
+{% extends 'recipe_book/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <h1>Ingredients</h1>
+
+    <div class="ingredient-list">
+
+        <!-- Iterate through every ingredient (context object passed by the view) -->
+        {% for ingredient in ingredients %}
+
+            <div class="ingredient-element">
+
+                <!-- Background and image -->
+                <div class="ingredient-element__img">
+                    <img src="{{ ingredient.image.url }}" alt="{{ ingredient.name }}">
+                </div>
+
+                <!-- Ingredient Info -->
+                <h2>{{ ingredient.name }}</h2>
+                <small>Unit Price: ${{ ingredient.unit_cost }} / {{ ingredient.unit }}</small>
+                <hr>
+                <p>{{ ingredient.description }}</p>
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+{% endblock %}

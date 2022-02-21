@@ -4,30 +4,6 @@
 {% block content %}
 
     <h1>Content Title</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur veritatis cupiditate tempore recusandae debitis corporis minus itaque voluptatem, sint aut quidem distinctio maiores delectus tenetur quasi expedita neque? Quod eligendi nostrum quos amet sunt quisquam velit illum? Ipsa nihil dolorem et animi ducimus eligendi facilis mollitia, magni eveniet laborum aliquam sunt, quae itaque harum maiores. Ut excepturi magni tenetur voluptate ad explicabo quibusdam. Dolores voluptatibus quasi vero reiciendis reprehenderit delectus? Exercitationem tempore alias placeat eveniet molestias sapiente, a sunt facere corporis, ratione esse unde minima cupiditate consectetur eligendi possimus suscipit fugit voluptates et natus aperiam eos quae. Totam nobis delectus facere eius? Nulla voluptas, debitis incidunt molestias expedita doloribus provident perspiciatis odit saepe inventore deserunt et illo laudantium perferendis delectus nam quaerat quos placeat mollitia rerum maxime ipsam? Iure, est nemo dolores recusandae eveniet distinctio non alias ipsum quia veniam tempora fuga at ducimus adipisci? Nobis amet odio perspiciatis enim sequi explicabo eum autem iure ipsum cum porro praesentium molestias ipsam molestiae soluta, vitae suscipit. Recusandae perferendis nobis sint at alias corporis cumque fuga placeat, porro fugiat, nihil eaque molestias! Veniam culpa expedita facilis quasi illo voluptates dolorum recusandae blanditiis distinctio saepe sunt at soluta corrupti quam dicta corporis perferendis, quos aut vel rem ea. Tempora tenetur ducimus temporibus recusandae eius. Voluptate porro voluptatem repudiandae incidunt fugit ipsa veritatis explicabo dolorum cumque. Modi asperiores rem libero quisquam? Placeat quae possimus, nesciunt quibusdam ratione magnam iusto facere nam maxime rerum saepe asperiores modi fuga laudantium quia officia magni quisquam dolores ducimus voluptatum porro distinctio eos dicta optio. Eaque nobis nisi quam, cupiditate iste distinctio. Maxime inventore, cum iure nisi fugit ea, dignissimos modi harum quam odit nostrum explicabo eum mollitia? Amet quidem culpa voluptatem deleniti aperiam assumenda expedita sapiente? Vel provident porro laborum quam quis est dolorum! Doloribus eaque corrupti rem!</p>
-
-    <div class="ingredient-list">
-
-        {% for ingredient in ingredients %}
-
-            <div class="ingredient-element">
-
-                <!-- Background and image -->
-                <div class="ingredient-element__img">
-                    <img src="{{ ingredient.image.url }}" alt="{{ ingredient.name }}">
-                </div>
-
-                <!-- Ingredient Info -->
-                <h2>{{ ingredient.name }}</h2>
-                <small>Unit Price: ${{ ingredient.unit_cost }} / {{ ingredient.unit }}</small>
-                <hr>
-                <p>{{ ingredient.description }}</p>
-            </div>
-
-        {% endfor %}
-
-    </div>
-
-    
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur veritatis cupiditate tempore recusandae debitis corporis minus itaque voluptatem, sint aut quidem distinctio maiores delectus tenetur quasi expedita neque? Quod eligendi nostrum quos amet sunt quisquam velit illum? Ipsa nihil dolorem et animi ducimus eligendi facilis mollitia, magni eveniet laborum aliquam sunt, quae itaque harum maiores. Ut excepturi magni tenetur voluptate ad explicabo quibusdam. Dolores voluptatibus quasi vero reiciendis reprehenderit delectus? Exercitationem tempore alias placeat eveniet molestias sapiente, a sunt facere corporis, ratione esse unde minima cupiditate consectetur eligendi possimus suscipit fugit voluptates et natus aperiam eos quae. Totam nobis delectus facere eius? Nulla voluptas, debitis incidunt molestias expedita doloribus provident perspiciatis odit saepe inventore deserunt et illo laudantium perferendis delectus nam quaerat quos placeat mollitia rerum maxime ipsam? Iure, est nemo dolores recusandae eveniet distinctio non alias ipsum quia veniam tempora fuga at ducimus adipisci? Nobis amet odio perspiciatis enim sequi explicabo eum autem iure ipsum cum porro praesentium molestias ipsam molestiae soluta, vitae suscipit. Recusandae perferendis nobis sint at alias corporis cumque fuga placeat, porro fugiat, nihil eaque molestias! Veniam culpa expedita facilis quasi illo voluptates dolorum recusandae blanditiis distinctio saepe sunt at soluta corrupti quam dicta corporis perferendis, quos aut vel rem ea. Tempora tenetur ducimus temporibus recusandae eius. Voluptate porro voluptatem repudiandae incidunt fugit ipsa veritatis explicabo dolorum cumque. Modi asperiores rem libero quisquam? Placeat quae possimus, nesciunt quibusdam ratione magnam iusto facere nam maxime rerum saepe asperiores modi fuga laudantium quia officia magni quisquam dolores ducimus voluptatum porro distinctio eos dicta optio. Eaque nobis nisi quam, cupiditate iste distinctio. Maxime inventore, cum iure nisi fugit ea, dignissimos modi harum quam odit nostrum explicabo eum mollitia? Amet quidem culpa voluptatem deleniti aperiam assumenda expedita sapiente? Vel provident porro laborum quam quis est dolorum! Doloribus eaque corrupti rem!</p>    
 
 {% endblock %}

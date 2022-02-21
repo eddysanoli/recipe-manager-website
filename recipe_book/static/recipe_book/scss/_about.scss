@@ -1,0 +1,51 @@
+.about {
+    
+    // Grid settings
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    justify-content: center;
+
+    // Yellow outline
+    outline: 0.3rem dashed $secondary-color;
+    border-radius: 15px;
+
+    // Margin and padding
+    padding: 2rem;
+    
+    // About Info
+    .about__info {
+        text-align: justify;
+        margin-right: 30px;
+    }
+
+    // About Image
+    .about__img {
+
+        // Same image and description width
+        width: 300px;
+
+        // Separate about text from image
+        margin-left: 30px;
+
+        // Background color
+        background-color: $neutral-color;
+        border-radius: 15px;
+        padding: 15px;
+        text-align: center;
+
+        // CEO Image
+        img {
+            aspect-ratio: 1;
+            width: 90%;
+            margin-top: 15px; 
+            margin-bottom: 15px;
+        }
+
+        // Small Description
+        small {
+            color: rgb(77, 77, 77);
+        }
+
+    }
+
+}
