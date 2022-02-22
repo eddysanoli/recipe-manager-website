@@ -10,7 +10,7 @@
 
     <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
     <a type="button" class="btn btn-outline-dark" href="{% url 'recipe-delete' recipe.id %}"><i class="fa-solid fa-trash"></i> DELETE</a>
-    <a type="button" class="btn btn-outline-dark" href="{% url 'recipe-create' %}"><i class="fas fa-edit"></i> EDIT</a>
+    <a type="button" class="btn btn-outline-dark" href="{% url 'recipe-update' recipe.id %}"><i class="fas fa-edit"></i> EDIT</a>
 
 
     <p>{{ recipe.description }}</p>

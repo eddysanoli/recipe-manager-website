@@ -13,7 +13,7 @@ from .models import Ingredient, Recipe
 import pint
 
 # =====================
-# HOME
+# VIEW: HOME
 # =====================
 
 def home(request):
@@ -24,14 +24,14 @@ def home(request):
     })
 
 # =====================
-# ABOUT
+# VIEW: ABOUT
 # =====================
 
 def about(request):
     return render(request, 'recipe_book/about.html')
 
 # =====================
-# INGREDIENT LIST
+# VIEW: INGREDIENT LIST
 # =====================
 
 class IngredientListView(ListView):
@@ -46,7 +46,7 @@ class IngredientListView(ListView):
     context_object_name = "ingredients"
 
 # =====================
-# CREATE INGREDIENT
+# VIEW: CREATE INGREDIENT
 # =====================
 
 # Create and update views will look for a template called:
@@ -78,7 +78,7 @@ class IngredientCreateView(CreateView):
         return reverse('ingredient-list', kwargs={})
 
 # =====================
-# UPDATE INGREDIENT
+# VIEW: UPDATE INGREDIENT
 # =====================
 
 # Create and update views will look for a template called:
@@ -121,7 +121,7 @@ class IngredientUpdateView(UserPassesTestMixin, UpdateView):
             return False
 
 # =====================
-# INGREDIENT DELETE
+# VIEW: INGREDIENT DELETE
 # =====================
 
 # Class based view will look for a template called:
@@ -150,7 +150,7 @@ class IngredientDeleteView(UserPassesTestMixin, DeleteView):
             return False
 
 # =====================
-# RECIPE LIST
+# VIEW: RECIPE LIST
 # =====================
 
 class RecipeListView(ListView):
@@ -165,7 +165,7 @@ class RecipeListView(ListView):
     context_object_name = "recipes"
 
 # =====================
-# RECIPE DETAIL
+# VIEW: RECIPE DETAIL
 # =====================
 
 class RecipeDetailView(DetailView):
@@ -177,7 +177,7 @@ class RecipeDetailView(DetailView):
     template_name = "recipe_book/recipe_detail.html"
 
 # =====================
-# RECIPE DELETE
+# VIEW: RECIPE DELETE
 # =====================
 
 # Class based view will look for a template called:
@@ -207,7 +207,7 @@ class RecipeDeleteView(DeleteView):
             return False
 
 # =====================
-# CREATE RECIPE
+# VIEW: CREATE RECIPE
 # =====================
 
 # Create and update views will look for a template called:
@@ -230,92 +230,8 @@ class RecipeCreateView(CreateView):
     # Overwrite "form_valid" method of parent to add the author
     def form_valid(self, form):
 
-        # ---------------------
-        # INGREDIENTS
-
-        # Get all the input fields related to ingredient info
-        ingredient_inputs = [POST_key for POST_key in self.request.POST.keys() if "ingredient" in POST_key]
-
-        # Initialize control variables:
-        #   - ingredients: List for all ingredient details
-        #   - ingredient-count: Number of ingredients in list
-        #   - ingredient-details: Dictionary with the properties of a single ingredient
-        ingredients = []
-        ingredient_count = 0
-        ingredient_details = {}
-
-        # For every input field that has "ingredient" in its name
-        for input in ingredient_inputs:
-            
-            # Split the field name
-            #   ingredient-name-0 = ingredient-<property>-<number>
-            _, property, ingredient_number = input.split("-")
-
-            # If the ingredient number is different from the current count
-            # add the current ingredient details to the list and start filling a new one
-            if ingredient_count != int(ingredient_number):
-                ingredient_details["id"] = ingredient_count
-                ingredients.append(ingredient_details)
-                ingredient_details = {}
-                ingredient_count += 1
-            
-            # Add the value of the field under the "property" name
-            ingredient_details[property] = self.request.POST[input]
-
-        # Add the remaining ingredient details
-        ingredients.append(ingredient_details)
-        print("[DEBUG] RECIPE INGREDIENTS: ", ingredients) 
-
-        # ---------------------
-        # TOTAL COST
-
-        # Map strings to "pint" units
-        ureg = pint.UnitRegistry()
-        pint_units = {
-            "kilograms": ureg.kilogram,
-            "grams": ureg.gram,
-            "liters": ureg.liter,
-            "pounds": ureg.pound,
-            "centiliters": ureg.centiliter
-        }
-
-        # Initial cost: $0
-        total_cost = 0
-
-        # Add the cost of every ingredient
-        for idx, ingredient in enumerate(ingredients):
-
-            # Extract the first database object with a matching ingredient name
-            # (If no match is found, the ingredient is skipped)
-            try: 
-                ingredient_object = Ingredient.objects.filter(name = ingredient["name"]).first()
-            except Exception as e:
-                continue
-            
-            # Units and unit cost present on the DB
-            db_unit_cost = ingredient_object.unit_cost
-            db_unit = ingredient_object.unit
-
-            # Amount and unit used in the recipe
-            recipe_amount = int(ingredient["amount"])
-            recipe_unit = ingredient["unit"]
-
-            # Add unit to the recipe amount
-            recipe_amount = recipe_amount * pint_units[recipe_unit]
-
-            # Convert the recipe amount to the ingredient units listed on the DB
-            db_amount = recipe_amount.to(pint_units[db_unit])
-
-            # Individual ingredient cost
-            # (Rounded to two decimal places)
-            ingredient_cost = float(db_unit_cost) * float(db_amount.magnitude)
-            ingredient_cost = round(ingredient_cost, 2)
-
-            # Add the ingredient cost to the ingredients list
-            ingredients[idx]["cost"] = ingredient_cost
-
-            # Add individual cost to the total
-            total_cost += ingredient_cost
+        # Parse the ingredient inputs and calculate the costs
+        ingredients, total_cost = parse_ingredients(self)
 
         # Model: Save ingredient properties (now with cost) and total cost of recipe
         form.instance.ingredients = ingredients
@@ -338,7 +254,7 @@ class RecipeCreateView(CreateView):
 
 
 # =====================
-# UPDATE RECIPE
+# VIEW: UPDATE RECIPE
 # =====================
 
 # Create and update views will look for a template called:
@@ -355,98 +271,17 @@ class RecipeUpdateView(UpdateView):
     # Template for the view
     fields = ['title', 'description', 'image']
 
+    # Name of the object passed to the template
+    context_object_name = "recipe"
+
     # =====================
     # METHODS
 
-    # Overwrite "form_valid" method of parent to add the author
+    # To avoid repetition, we use the form valid method from the Create view
     def form_valid(self, form):
-
-        # ---------------------
-        # INGREDIENTS
-
-        # Get all the input fields related to ingredient info
-        ingredient_inputs = [POST_key for POST_key in self.request.POST.keys() if "ingredient" in POST_key]
-
-        # Initialize control variables:
-        #   - ingredients: List for all ingredient details
-        #   - ingredient-count: Number of ingredients in list
-        #   - ingredient-details: Dictionary with the properties of a single ingredient
-        ingredients = []
-        ingredient_count = 0
-        ingredient_details = {}
-
-        # For every input field that has "ingredient" in its name
-        for input in ingredient_inputs:
-            
-            # Split the field name
-            #   ingredient-name-0 = ingredient-<property>-<number>
-            _, property, ingredient_number = input.split("-")
-
-            # If the ingredient number is different from the current count
-            # add the current ingredient details to the list and start filling a new one
-            if ingredient_count != int(ingredient_number):
-                ingredient_details["id"] = ingredient_count
-                ingredients.append(ingredient_details)
-                ingredient_details = {}
-                ingredient_count += 1
-            
-            # Add the value of the field under the "property" name
-            ingredient_details[property] = self.request.POST[input]
-
-        # Add the remaining ingredient details
-        ingredients.append(ingredient_details)
-        print("[DEBUG] RECIPE INGREDIENTS: ", ingredients) 
-
-        # ---------------------
-        # TOTAL COST
-
-        # Map strings to "pint" units
-        ureg = pint.UnitRegistry()
-        pint_units = {
-            "kilograms": ureg.kilogram,
-            "grams": ureg.gram,
-            "liters": ureg.liter,
-            "pounds": ureg.pound,
-            "centiliters": ureg.centiliter
-        }
-
-        # Initial cost: $0
-        total_cost = 0
-
-        # Add the cost of every ingredient
-        for idx, ingredient in enumerate(ingredients):
-
-            # Extract the first database object with a matching ingredient name
-            # (If no match is found, the ingredient is skipped)
-            try: 
-                ingredient_object = Ingredient.objects.filter(name = ingredient["name"]).first()
-            except Exception as e:
-                continue
-            
-            # Units and unit cost present on the DB
-            db_unit_cost = ingredient_object.unit_cost
-            db_unit = ingredient_object.unit
-
-            # Amount and unit used in the recipe
-            recipe_amount = int(ingredient["amount"])
-            recipe_unit = ingredient["unit"]
-
-            # Add unit to the recipe amount
-            recipe_amount = recipe_amount * pint_units[recipe_unit]
-
-            # Convert the recipe amount to the ingredient units listed on the DB
-            db_amount = recipe_amount.to(pint_units[db_unit])
-
-            # Individual ingredient cost
-            # (Rounded to two decimal places)
-            ingredient_cost = float(db_unit_cost) * float(db_amount.magnitude)
-            ingredient_cost = round(ingredient_cost, 2)
-
-            # Add the ingredient cost to the ingredients list
-            ingredients[idx]["cost"] = ingredient_cost
-
-            # Add individual cost to the total
-            total_cost += ingredient_cost
+        
+        # Parse the ingredient inputs and calculate the costs
+        ingredients, total_cost = parse_ingredients(self)
 
         # Model: Save ingredient properties (now with cost) and total cost of recipe
         form.instance.ingredients = ingredients
@@ -463,6 +298,101 @@ class RecipeUpdateView(UpdateView):
         # Run the parent class "form_valid" method
         return super().form_valid(form)
 
-    # New redirect url after a successful post
-    def get_success_url(self):
-        return reverse('recipe-detail', kwargs={'pk': self.pk})
+
+# =====================
+# FUNC: INGREDIENT PARSING
+# =====================
+
+def parse_ingredients(self):
+
+    # ---------------------
+    # INGREDIENTS
+
+    # Get all the input fields related to ingredient info
+    ingredient_inputs = [POST_key for POST_key in self.request.POST.keys() if "ingredient" in POST_key]
+
+    # Initialize control variables:
+    #   - ingredients: List for all ingredient details
+    #   - ingredient-count: Number of ingredients in list
+    #   - ingredient-details: Dictionary with the properties of a single ingredient
+    ingredients = []
+    ingredient_count = 0
+    ingredient_details = {}
+
+    # For every input field that has "ingredient" in its name
+    for input in ingredient_inputs:
+        
+        # Split the field name
+        #   ingredient-name-0 = ingredient-<property>-<number>
+        _, property, ingredient_number = input.split("-")
+
+        # If the ingredient number is different from the current count
+        # add the current ingredient details to the list and start filling a new one
+        if ingredient_count != int(ingredient_number):
+            ingredient_details["id"] = ingredient_count
+            ingredients.append(ingredient_details)
+            ingredient_details = {}
+            ingredient_count += 1
+        
+        # Add the value of the field under the "property" name
+        ingredient_details[property] = self.request.POST[input]
+
+    # Add the remaining ingredient details
+    ingredient_details["id"] = ingredient_count
+    ingredients.append(ingredient_details)
+    print("[DEBUG] RECIPE INGREDIENTS: ", ingredients) 
+
+    # ---------------------
+    # TOTAL COST
+
+    # Map strings to "pint" units
+    ureg = pint.UnitRegistry()
+    pint_units = {
+        "kilograms": ureg.kilogram,
+        "grams": ureg.gram,
+        "liters": ureg.liter,
+        "pounds": ureg.pound,
+        "centiliters": ureg.centiliter
+    }
+
+    # Initial cost: $0
+    total_cost = 0
+
+    # Add the cost of every ingredient
+    for idx, ingredient in enumerate(ingredients):
+
+        # Extract the first database object with a matching ingredient name
+        # (If no match is found, the ingredient is skipped)
+        try: 
+            ingredient_object = Ingredient.objects.filter(name = ingredient["name"]).first()
+        except Exception as e:
+            continue
+        
+        # Units and unit cost present on the DB
+        db_unit_cost = ingredient_object.unit_cost
+        db_unit = ingredient_object.unit
+
+        # Amount and unit used in the recipe
+        recipe_amount = int(ingredient["amount"])
+        recipe_unit = ingredient["unit"]
+
+        # Add unit to the recipe amount
+        recipe_amount = recipe_amount * pint_units[recipe_unit]
+
+        # Convert the recipe amount to the ingredient units listed on the DB
+        db_amount = recipe_amount.to(pint_units[db_unit])
+
+        # Individual ingredient cost
+        # (Rounded to two decimal places)
+        ingredient_cost = float(db_unit_cost) * float(db_amount.magnitude)
+        ingredient_cost = round(ingredient_cost, 2)
+
+        # Add the ingredient cost to the ingredients list
+        ingredients[idx]["cost"] = ingredient_cost
+
+        print(f'[DEBUG] INGREDIENT COST: ({ingredient["name"]})', db_amount, db_unit_cost)
+
+        # Add individual cost to the total
+        total_cost += ingredient_cost
+
+    return ingredients, total_cost

@@ -1,5 +1,6 @@
-// Initial number of ingredients
-let numIngredients = 0;
+// Initial number of ingredients on the form
+let numIngredients = document.getElementById("ingredient-inputs").children.length;
+console.log("Number of initial ingredients:", numIngredients);
 
 // =============================
 // CREATE NEW INGREDIENT ENTRY
@@ -25,17 +26,17 @@ addIngredientBtn.addEventListener("click", () => {
         switch (ingredientInputsElement.children[i].id) {
             case `ingredient-name`:
                 ingredientInputsElement.children[i].value = "";
-                ingredientInputsElement.children[i].name = `ingredient-name-${numIngredients}`;
+                ingredientInputsElement.children[i].name = `ingredient-name-${numIngredients - 1}`;
                 break;
             case "ingredient-amount":
                 ingredientInputsElement.children[i].value = "";
-                ingredientInputsElement.children[i].name = `ingredient-amount-${numIngredients}`;
+                ingredientInputsElement.children[i].name = `ingredient-amount-${numIngredients - 1}`;
                 break;
             case "ingredient-unit":
-                ingredientInputsElement.children[i].name = `ingredient-unit-${numIngredients}`;
+                ingredientInputsElement.children[i].name = `ingredient-unit-${numIngredients - 1}`;
                 break;
             case "ingredient-delete":
-                ingredientInputsElement.children[i].name = `ingredient-delete-${numIngredients}`;
+                ingredientInputsElement.children[i].name = `ingredient-delete-${numIngredients - 1}`;
                 break;
         }
     }

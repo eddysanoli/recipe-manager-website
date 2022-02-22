@@ -88,4 +88,4 @@ class Recipe(models.Model):
 
     # Where a user should be redirected after a post
     def get_absolute_url(self):
-        return reverse('recipe-detail', kwargs={})
+        return reverse('recipe-detail', kwargs={'pk': self.id})
