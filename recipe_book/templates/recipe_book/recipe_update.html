@@ -1,0 +1,68 @@
+{% extends 'recipe_book/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+<!-- NOTE: Context object name = "form" -->
+{% block content %}
+
+    <h1 class="content-title">Update Recipe</h1>
+    <p>Messed up during the creation process? Edit to your hearts content</p>
+    
+    <!-- Add an encoding type to also save images onto the model -->
+    <form method="POST"  enctype="multipart/form-data">
+
+        <!-- CSRF token to prevent interception attacks -->
+        {% csrf_token %}
+
+        <!-- Form inputs -->
+        <fieldset class="form-group">
+
+            <!-- Default CreateView form -->
+            {{ form|crispy }}
+
+            <!-- Ingredients Input -->
+            <h3 class="mb-4 mt-4">Ingredients</h3>
+
+            <div id="ingredient-inputs">
+
+                <!-- Inputs necessary for new ingredient -->
+                <div id="ingredient-inputs__element" class="input-group mb-3">
+
+                    <!-- Ingredient Name -->
+                    <span class="input-group-text">Name</span>
+                    <input id="ingredient-name" type="text" class="form-control" placeholder="Ingredient Name" name="ingredient-name-0" aria-label="Ingredient Name">
+                    
+                    <!-- Ingredient Amount -->
+                    <span class="input-group-text">Amount</span>
+                    <input id="ingredient-amount" type="text" class="form-control" placeholder="Amount" name="ingredient-amount-0" aria-label="Ingredient Amount">
+                    
+                    <!-- Ingredient Unit -->
+                    <label class="input-group-text" for="ingredient-unit">Unit</label>
+                    <select id="ingredient-unit" name="ingredient-unit-0" class="form-select">
+                        <option selected>pounds</option>
+                        <option>kilograms</option>
+                        <option>grams</option>
+                        <option>centiliters</option>
+                        <option>liters</option>
+                    </select>
+
+                    <!-- Delete Button -->
+                    <button id="ingredient-delete" name="ingredient-delete" class="btn btn-outline-danger" type="button" disabled="True"><i class="fa-solid fa-circle-minus"></i></button>
+                </div>
+
+            </div>
+            
+            <!-- Add more ingredients button -->
+            <!--    - ID: Used to retrieve the element on javascript -->
+            <button class="btn btn-outline-info mb-4" id="add-ingredient" type="button">Add Ingredient</button>
+        </fieldset>
+
+        <!-- Submit button -->
+        <div class="form-group">
+            <button class="btn btn-outline-info mt-4" type="submit">Save</button>
+        </div>
+    </form>
+
+    <script src="{% static 'recipe_book/js/recipe_create.js' %}"></script>
+
+{% endblock %}

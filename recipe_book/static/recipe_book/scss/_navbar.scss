@@ -35,10 +35,13 @@
         }
 
         // Move rotate icon on hover
-        i:hover {
-            transition: all 0.5s ease-in;
-            transform: rotate(10deg);
+        i {
+            transition: all 0.3s ease-in;
+            &:hover {
+                transform: rotate(10deg);
+            }
         }
+        
 
     }
 

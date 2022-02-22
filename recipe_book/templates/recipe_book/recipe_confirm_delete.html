@@ -1,21 +1,21 @@
 {% extends "recipe_book/base.html" %}
 {% block content %}
 
-    <!-- NOTE: The ingredient object will be passed as "ingredient" -->
+    <!-- NOTE: Context object name = "recipe" -->
     <div class="content-section">
 
-        <form method="POST">
+        <form method="post">
 
             <!-- CSRF token to prevent request interception -->
             {% csrf_token %}
 
-            <!-- Question -->
-            <h3 class="mb-4">Are you sure you want to delete the ingredient "{{ ingredient.name }}"?</h3>
+            <!-- Warning -->
+            <h3 class="mb-4">Are you sure you want to delete the recipe "{{ recipe.title }}"?</h3>
 
             <!-- Delete / Cancel Buttons -->
             <div class="form-group">
                 <button class="btn btn-outline-danger" type="submit">Delete</button>
-                <a class="btn btn-outline-secondary" href="{% url 'ingredient-list' %}">Cancel</a>
+                <a class="btn btn-outline-secondary" href="{% url 'recipe-detail' recipe.id %}">Cancel</a>
             </div>
         </form>
     </div>

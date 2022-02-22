@@ -9,19 +9,25 @@
     <!-- New Recipe button -->
     <a type="button" class="btn btn-outline-dark" href="{% url 'recipe-create' %}"><i class="fa-solid fa-circle-plus"></i>  ADD RECIPE</a>
 
-    <div class="ingredient-list">
+    <div class="recipe-list">
 
         <!-- Iterate through every ingredient (context object passed by the view) -->
         {% for recipe in recipes %}
 
-            <div class="recipe-element">
+            <div class="recipe-list__element">
 
-                <hr>
-                <h2>{{ recipe.title }}</h2>
-                <small>{{ recipe.date_posted }}</small>
-                <p>{{ recipe.description }}</p>
-                <h3>{{ recipe.total_cost }}</h3>
-                
+                <div class="recipe-list__element--img">
+                    <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
+                </div>
+
+                <div class="recipe-list__element--info">
+                    <hr>
+                    <h2><a href="{% url 'recipe-detail' recipe.id %}">{{ recipe.title }}</a></h2>
+                    <small>{{ recipe.date_posted|date:"F d, Y" }}</small>
+                    <p>{{ recipe.description|truncatechars:250 }}</p>
+                    <h3>${{ recipe.total_cost }}</h3>
+                </div>
+
             </div>
 
         {% endfor %}

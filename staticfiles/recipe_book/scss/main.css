@@ -22,9 +22,10 @@
     padding: 2rem; }
     .nav .brand-logo a:hover {
       color: white; }
-    .nav .brand-logo i:hover {
-      transition: all 0.5s ease-in;
-      transform: rotate(10deg); }
+    .nav .brand-logo i {
+      transition: all 0.3s ease-in; }
+      .nav .brand-logo i:hover {
+        transform: rotate(10deg); }
   .nav .fa-pagelines {
     margin-left: -1rem;
     color: #FAB57A; }
@@ -109,6 +110,35 @@ footer {
       text-align: justify; }
     .ingredient-list .ingredient-element hr {
       height: 2px; }
+
+.recipe-list {
+  display: flex;
+  flex-direction: column;
+  align-content: center; }
+  .recipe-list__element {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    color: white;
+    background-color: #7A5A3D;
+    box-shadow: 2px 2px 20px 3px #868686;
+    border-radius: 15px;
+    padding: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem; }
+    .recipe-list__element--img img {
+      border-radius: 15px;
+      width: 300px; }
+    .recipe-list__element--info {
+      margin-left: 5%;
+      margin-right: 5%;
+      color: white; }
+      .recipe-list__element--info hr {
+        height: 4px; }
+      .recipe-list__element--info a {
+        transition: all 0.3s ease-in-out; }
+        .recipe-list__element--info a:hover {
+          color: #FAB57A; }
 
 .about {
   display: grid;

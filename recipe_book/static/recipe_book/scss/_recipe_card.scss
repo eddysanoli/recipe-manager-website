@@ -1,0 +1,59 @@
+.recipe-list {
+
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+
+    &__element {
+
+        // Flex settings
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+
+        // Color
+        $background-card-color: #7A5A3D;
+        color: set-text-color($background-card-color);
+        background-color: $background-card-color;
+        box-shadow: 2px 2px 20px 3px rgb(134, 134, 134);
+        
+        // Shape and size
+        border-radius: 15px;
+        
+        // Margin and padding
+        padding: 2rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+
+        &--img {
+
+            img {
+                border-radius: 15px;
+                width: 300px;
+            }
+
+        }
+
+        // Recipe Info
+        &--info {
+
+            margin-left: 5%;
+            margin-right: 5%;
+            color: set-text-color($background-card-color);
+
+            hr {
+                height: 4px;
+            }
+
+            a {
+                @include transition-ease;
+                &:hover {
+                    color: $secondary-color;
+                }
+            }
+
+        }
+
+    }
+
+}

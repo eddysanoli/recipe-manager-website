@@ -55,7 +55,7 @@ class Recipe(models.Model):
     title = models.CharField(max_length=100)
 
     # Recipe ID
-    recipe_id = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
 
     # Description
     # Unrestricted text
