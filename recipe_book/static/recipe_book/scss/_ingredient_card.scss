@@ -45,6 +45,16 @@ $card-radius: 20px;
             border-radius: $card-radius $card-radius 0 0;
             margin: -8% -8% 25px -8%;
 
+            small {
+                position: absolute;
+                display: flex;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding: 10px 15px;
+                font-family: "Montserrat", sans-serif;
+                font-weight: 700;
+            }
+
             img {
                 aspect-ratio: 1;
                 width: 70%;

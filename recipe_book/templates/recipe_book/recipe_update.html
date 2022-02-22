@@ -33,19 +33,19 @@
                 {% for ingredient in recipe.ingredients %}
 
                     <!-- Inputs necessary for new ingredient -->
-                    <div id="ingredient-inputs__element" class="input-group mb-3">
+                    <div id="ingredient-inputs__element" class="input-group mb-3 ingredient-inputs__element">
 
                         <!-- Ingredient Name -->
                         <span class="input-group-text">Name</span>
-                        <input value="{{ ingredient.name }}" id="ingredient-name" type="text" class="form-control" placeholder="Ingredient Name" name="ingredient-name-{{ ingredient.id }}" aria-label="Ingredient Name">
+                        <input value="{{ ingredient.name }}" id="ingredient-name" type="text" class="form-control" placeholder="Ingredient Name" name="ingredient-name-{{ ingredient.list_id }}" aria-label="Ingredient Name">
                         
                         <!-- Ingredient Amount -->
                         <span class="input-group-text">Amount</span>
-                        <input value="{{ ingredient.amount }}" id="ingredient-amount" type="text" class="form-control" placeholder="Amount" name="ingredient-amount-{{ ingredient.id }}" aria-label="Ingredient Amount">
+                        <input value="{{ ingredient.amount }}" id="ingredient-amount" type="text" class="form-control" placeholder="Amount" name="ingredient-amount-{{ ingredient.list_id }}" aria-label="Ingredient Amount">
                         
                         <!-- Ingredient Unit -->
                         <label class="input-group-text" for="ingredient-unit">Unit</label>
-                        <select id="ingredient-unit" name="ingredient-unit-{{ ingredient.id }}" class="form-select">
+                        <select id="ingredient-unit" name="ingredient-unit-{{ ingredient.list_id }}" class="form-select">
                             <option {% if ingredient.unit == "pounds" %} selected {% endif %}>pounds</option>
                             <option {% if ingredient.unit == "kilograms" %} selected {% endif %}>kilograms</option>
                             <option {% if ingredient.unit == "grams" %} selected {% endif %}>grams</option>
@@ -54,7 +54,7 @@
                         </select>
 
                         <!-- Delete Button -->
-                        <button id="ingredient-delete" name="ingredient-delete-{{ ingredient.id }}" class="btn btn-outline-danger" type="button" disabled="True"><i class="fa-solid fa-circle-minus"></i></button>
+                        <button id="ingredient-delete" name="ingredient-delete-{{ ingredient.list_id }}" class="btn btn-outline-danger ingredient-delete" type="button" disabled="True"><i class="fa-solid fa-circle-minus"></i></button>
                     
                     </div>
 

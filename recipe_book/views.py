@@ -329,7 +329,7 @@ def parse_ingredients(self):
         # If the ingredient number is different from the current count
         # add the current ingredient details to the list and start filling a new one
         if ingredient_count != int(ingredient_number):
-            ingredient_details["id"] = ingredient_count
+            ingredient_details["list_id"] = ingredient_count
             ingredients.append(ingredient_details)
             ingredient_details = {}
             ingredient_count += 1
@@ -338,9 +338,22 @@ def parse_ingredients(self):
         ingredient_details[property] = self.request.POST[input]
 
     # Add the remaining ingredient details
-    ingredient_details["id"] = ingredient_count
+    ingredient_details["list_id"] = ingredient_count
     ingredients.append(ingredient_details)
     print("[DEBUG] RECIPE INGREDIENTS: ", ingredients) 
+
+    # ---------------------
+    # INGREDIENT OBJECT
+
+    for ingredient in ingredients:
+
+        # Store a reference to the ingredient object
+        # inside the ingredients list
+        try:   
+            ingredient_object = Ingredient.objects.filter(name = ingredient["name"]).first()
+            ingredient["article_id"] = ingredient_object.article_id
+        except Exception as e:
+            print(f"[DEBUG] ERROR: No DB match was found for {ingredient['name']}")
 
     # ---------------------
     # TOTAL COST
@@ -380,7 +393,10 @@ def parse_ingredients(self):
         recipe_amount = recipe_amount * pint_units[recipe_unit]
 
         # Convert the recipe amount to the ingredient units listed on the DB
-        db_amount = recipe_amount.to(pint_units[db_unit])
+        try:
+            db_amount = recipe_amount.to(pint_units[db_unit])
+        except Exception as e:
+            db_amount = recipe_amount
 
         # Individual ingredient cost
         # (Rounded to two decimal places)
@@ -389,7 +405,6 @@ def parse_ingredients(self):
 
         # Add the ingredient cost to the ingredients list
         ingredients[idx]["cost"] = ingredient_cost
-
         print(f'[DEBUG] INGREDIENT COST: ({ingredient["name"]})', db_amount, db_unit_cost)
 
         # Add individual cost to the total

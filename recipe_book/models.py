@@ -84,7 +84,7 @@ class Recipe(models.Model):
 
     # Default object name
     def __str__(self) -> str:
-        return f'{self.title}-{self.recipe_id}'
+        return f'{self.title}-{self.id}'
 
     # Where a user should be redirected after a post
     def get_absolute_url(self):
