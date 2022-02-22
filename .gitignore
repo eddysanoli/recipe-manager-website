@@ -2,3 +2,5 @@
 recipe_manager/.env
 db.sqlite3
 recipe_manager/__pycache__
+media/ingredient-pics
+media/recipe-pics

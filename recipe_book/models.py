@@ -70,6 +70,9 @@ class Recipe(models.Model):
     # - upload_to: Directory in which the image will be saved
     image = models.ImageField(default='default-recipe.jpg', upload_to='recipe-pics')
 
+    # Total recipe cost
+    total_cost = models.DecimalField(max_digits=6, decimal_places=2, default=0)
+
     # Ingredient list
     ingredients = models.JSONField()
 

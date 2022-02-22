@@ -1,18 +1,16 @@
 {% extends "recipe_book/base.html" %}
 {% load crispy_forms_tags %}
 
+<!-- NOTE: Context object name = "form" -->
 {% block content %}
-
-    <!-- NOTE: Context object name = "form" -->
 
     <!-- Add an encoding type to also save images onto the model -->
     <form method="POST"  enctype="multipart/form-data">
 
-        <!-- Make sure to add a CSRF token to prevent the POST -->
-        <!-- request from being intercepted by an attacker -->
+        <!-- CSRF token to prevent interception attacks -->
         {% csrf_token %}
 
-        <!-- Display the entire form -->
+        <!-- Default CreateView form -->
         <fieldset class="form-group">
             <legend class="border-bottom mb-4">Create New Ingredient</legend>
             
@@ -21,7 +19,6 @@
         </fieldset>
 
         <!-- Submit button -->
-        <!-- (Elements use bootstrap pre-defined classes) -->
         <div class="form-group">
             <button class="btn btn-outline-info" type="submit">Save</button>
         </div>

@@ -1,0 +1,31 @@
+{% extends 'recipe_book/base.html' %}
+{% load static %}
+
+<!-- NOTE: Context object name = "recipes" -->
+{% block content %}
+
+    <h1 class="content-title">Recipes</h1>
+
+    <!-- New Recipe button -->
+    <a type="button" class="btn btn-outline-dark" href="{% url 'recipe-create' %}"><i class="fa-solid fa-circle-plus"></i>  ADD RECIPE</a>
+
+    <div class="ingredient-list">
+
+        <!-- Iterate through every ingredient (context object passed by the view) -->
+        {% for recipe in recipes %}
+
+            <div class="recipe-element">
+
+                <hr>
+                <h2>{{ recipe.title }}</h2>
+                <small>{{ recipe.date_posted }}</small>
+                <p>{{ recipe.description }}</p>
+                <h3>{{ recipe.total_cost }}</h3>
+                
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+{% endblock %}

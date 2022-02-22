@@ -11,6 +11,7 @@ django-sass-processor = "*"
 pillow = "*"
 django-crispy-forms = "*"
 crispy-bootstrap5 = "*"
+pint = "*"
 
 [dev-packages]
 
