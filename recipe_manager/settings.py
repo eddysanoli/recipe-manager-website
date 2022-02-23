@@ -1,5 +1,6 @@
 from dotenv import load_dotenv, find_dotenv
 from pathlib import Path
+import django_heroku
 import os
 
 # =====================
@@ -23,7 +24,8 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 DEBUG = (os.environ.get("DJANGO_DEBUG_VALUE") == "True")
 
 ALLOWED_HOSTS = [
-    '127.0.0.1'
+    '127.0.0.1',
+    'https://recipe-manager-django.herokuapp.com'
 ]
 
 
@@ -161,3 +163,61 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Public URL for the media route
 MEDIA_URL = '/media/'
 
+
+# =====================
+# Login Page
+
+# URL to redirect to after login
+LOGIN_REDIRECT_URL = 'book-home'
+
+# When a user is not logged in and a page that he is trying to access is not
+# available when logged out, then this is the page where he is going to be redirected
+LOGIN_URL = 'login'
+
+# =====================
+# Email Settings
+
+# Safety tip: To keep the "app key" away from the source code, it was stored in an
+# environment variable inside a .env file. During deployment, that variable will consist
+# of an environment variable from the machine.
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+# Get user and password by follwing:
+# https://support.google.com/accounts/answer/185833?hl=es
+EMAIL_HOST_USER = os.environ.get('EMAIL_USER') 
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS') 
+
+# =====================
+# AWS Config
+
+# Key ID and secret for AWS
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID") 
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY") 
+
+# Settings to prevent the "Please use AWS4-HMAC-SHA256" error
+# See: https://github.com/jschneier/django-storages/issues/782
+AWS_S3_REGION_NAME = 'us-east-2'
+AWS_S3_ADDRESSING_STYLE = "virtual"
+
+# Number of the bucket where the files will be stored
+AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME") 
+
+# Prevent a file from being overwritten if two files have the same name
+# In the case that a conflict is found, the repeated file will be renamed
+AWS_S3_FILE_OVERWRITE = False
+
+# Used to prevent issues on previous versions of django-storage
+AWS_DEFAULT_ACL = None
+
+# Change this to use S3 storage
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+
+# =====================
+# Heroku Settings
+
+# Setup various things to work when deploying onto heroku
+django_heroku.settings(locals())
