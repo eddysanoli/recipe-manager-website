@@ -36,13 +36,53 @@
 
                 <!-- Edit and delete buttons -->
                 <div class="ingredient-element__btn">
-                    <a href="{% url 'ingredient-delete' ingredient.article_id %}"><i class="fa-solid fa-trash"></i></a>
-                    <a href="{% url 'ingredient-update' ingredient.article_id %}"><i class="fa-solid fa-pen-to-square"></i></a>
+                    {% if user == ingredient.author %}
+                        <a href="{% url 'ingredient-delete' ingredient.article_id %}"><i class="fa-solid fa-trash"></i></a>
+                        <a href="{% url 'ingredient-update' ingredient.article_id %}"><i class="fa-solid fa-pen-to-square"></i></a>
+                    {% endif %}
                 </div>
                 
             </div>
 
         {% endfor %}
+
+    </div>
+
+    <!-- Pagination-->
+    <div class="pagination">
+
+        {% if is_paginated %}
+
+            <!-- Previous Pages -->
+            <!-- page_obj: Current page object (eg. Page 1 object) -->
+            {% if page_obj.has_previous %}
+                <a class="btn btn-outline-dark mb-4" href="?page=1">First</a>
+                <a class="btn btn-outline-dark mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            {% endif %}
+
+            <!-- Nearby Pages -->
+            <!-- Iterate through all of the pages -->
+            {% for num in page_obj.paginator.page_range %}
+
+                <!-- Num = Current page -->
+                {% if page_obj.number == num %}
+                    <a href="?page={{ num }}" class="btn btn-dark mb-4">{{ num }}</a>
+                
+                <!-- Num is 3 numbers away from the current page -->
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <a href="?page={{ num }}" class="btn btn-outline-dark mb-4">{{ num }}</a>
+                {% endif %}
+
+            {% endfor %}
+
+            <!-- Next Pages -->
+            <!-- page_obj: Current page object (eg. Page 1 object) -->
+            {% if page_obj.has_next %}
+                <a class="btn btn-outline-dark mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+                <a class="btn btn-outline-dark mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+            {% endif %}
+
+        {% endif %}
 
     </div>
 

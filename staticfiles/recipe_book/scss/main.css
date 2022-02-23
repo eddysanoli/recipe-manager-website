@@ -183,12 +183,16 @@ footer {
   border-radius: 15px; }
   .recipe-details .recipe-header__info {
     padding: 2rem;
-    color: white; }
+    color: white;
+    width: 80%; }
     .recipe-details .recipe-header__info--btns {
       display: flex;
       justify-content: flex-end; }
       .recipe-details .recipe-header__info--btns .btn {
-        margin: 0 5px; }
+        margin: 0 5px;
+        cursor: not-allowed;
+        pointer-events: none;
+        text-decoration: none; }
     .recipe-details .recipe-header__info--data {
       margin-top: -2.5rem; }
       .recipe-details .recipe-header__info--data .recipe-user {
@@ -223,6 +227,13 @@ footer {
   .profile form {
     padding: 2rem;
     margin: 0 2rem; }
+
+.pagination {
+  display: flex;
+  flex-direction: row;
+  justify-content: center; }
+  .pagination .btn {
+    margin: 0 5px; }
 
 a {
   color: white;

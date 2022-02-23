@@ -49,6 +49,9 @@ class IngredientListView(ListView):
     # Model result ordering
     ordering = ['-article_id']
 
+    # Number of elements per page
+    paginate_by = 6
+
     # Send the search term through a POST request to "ingredient-search"
     def post(self, request, *args, **kwargs):
 
@@ -75,6 +78,9 @@ class IngredientSearchListView(ListView):
 
     # Context object name
     context_object_name = 'ingredients'
+
+    # Number of elements per page
+    paginate_by = 6
 
     # Model result ordering
     ordering = ['-article_id']
@@ -129,7 +135,7 @@ class IngredientCreateView(CreateView):
     def form_valid(self, form):
 
         # Set the author of the new ingredient
-        form.instance.author = self.request.user()
+        form.instance.author = self.request.user
 
         # Run the parent class "form_valid" method
         return super().form_valid(form)
@@ -223,6 +229,9 @@ class RecipeListView(ListView):
 
     # Name of the context object passed to the template
     context_object_name = "recipes"
+
+    # Number of results to display at a time
+    paginate_by = 5
 
 # =====================
 # VIEW: RECIPE DETAIL

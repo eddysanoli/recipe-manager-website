@@ -5,6 +5,7 @@
 
     <h1>Search Results</h1>
 
+    <!-- Result Text -->
     {% if ingredients.count == 1 %}
         <p>1 search result found for "{{ view.kwargs.search_term }}"</p>
     {% elif ingredients.count > 1 %}
@@ -20,9 +21,11 @@
         <button class="btn btn-outline-secondary" type="submit">SEARCH <i class="fa-solid fa-magnifying-glass"></i></button>
     </form>
 
-    <!-- Create new ingredient button -->
+    <!-- New Ingredient -->
     <a type="button" class="btn btn-outline-dark" href="{% url 'ingredient-create' %}"><i class="fa-solid fa-circle-plus"></i> ADD INGREDIENT</a>
 
+
+    <!-- Ingredient List -->
     <div class="ingredient-list">
 
         <!-- Iterate through every ingredient (context object passed by the view) -->
@@ -51,6 +54,44 @@
             </div>
 
         {% endfor %}
+
+    </div>
+
+    <!-- Pagination-->
+    <div class="pagination">
+
+        {% if is_paginated %}
+
+            <!-- Previous Pages -->
+            <!-- page_obj: Current page object (eg. Page 1 object) -->
+            {% if page_obj.has_previous %}
+                <a class="btn btn-outline-dark mb-4" href="?page=1">First</a>
+                <a class="btn btn-outline-dark mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            {% endif %}
+
+            <!-- Nearby Pages -->
+            <!-- Iterate through all of the pages -->
+            {% for num in page_obj.paginator.page_range %}
+
+                <!-- Num = Current page -->
+                {% if page_obj.number == num %}
+                    <a href="?page={{ num }}" class="btn btn-dark mb-4">{{ num }}</a>
+                
+                <!-- Num is 3 numbers away from the current page -->
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <a href="?page={{ num }}" class="btn btn-outline-dark mb-4">{{ num }}</a>
+                {% endif %}
+
+            {% endfor %}
+
+            <!-- Next Pages -->
+            <!-- page_obj: Current page object (eg. Page 1 object) -->
+            {% if page_obj.has_next %}
+                <a class="btn btn-outline-dark mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+                <a class="btn btn-outline-dark mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+            {% endif %}
+
+        {% endif %}
 
     </div>
 

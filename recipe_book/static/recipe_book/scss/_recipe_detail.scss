@@ -28,6 +28,7 @@
 
             padding: 2rem;
             color: set-text-color($color-1);
+            width: 80%;
 
             &--btns {
                 
@@ -35,7 +36,13 @@
                 display: flex;
                 justify-content: flex-end;
 
-                .btn {margin: 0 5px}
+                .btn {
+                    margin: 0 5px;
+                    cursor: not-allowed;
+                    pointer-events: none;
+                    text-decoration: none;
+                }
+                
 
             }
 

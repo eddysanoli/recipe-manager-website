@@ -18,8 +18,13 @@
 
                 <!-- Buttons -->
                 <div class="recipe-header__info--btns">
-                    <a type="button" class="btn btn-outline-light" href="{% url 'recipe-delete' recipe.id %}"><i class="fa-solid fa-trash"></i> DELETE</a>
-                    <a type="button" class="btn btn-outline-light" href="{% url 'recipe-update' recipe.id %}"><i class="fas fa-edit"></i> EDIT</a>        
+                    {% if user == recipe.author %}
+                        <a type="button" class="btn btn-outline-light" href="{% url 'recipe-delete' recipe.id %}"><i class="fa-solid fa-trash"></i> DELETE</a>
+                        <a type="button" class="btn btn-outline-light" href="{% url 'recipe-update' recipe.id %}"><i class="fas fa-edit"></i> EDIT</a>        
+                    {% else %}
+                        <p> </p><br>
+                        <p> </p><br>
+                    {% endif %}    
                 </div>
 
                 <!-- Recipe Info -->
