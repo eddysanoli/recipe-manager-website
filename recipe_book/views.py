@@ -310,9 +310,7 @@ class RecipeCreateView(LoginRequiredMixin, CreateView):
         # AUTHOR
 
         # Model: Set the author of the new ingredient
-        # TODO: CHANGE THIS ASSIGNMENT AFTER IMPLEMENTING LOGIN
-        # form.instance.author = self.request.user
-        form.instance.author = User.objects.first()
+        form.instance.author = self.request.user
 
         # Run the parent class "form_valid" method
         return super().form_valid(form)
@@ -360,9 +358,7 @@ class RecipeUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         # AUTHOR
 
         # Model: Set the author of the new ingredient
-        # TODO: CHANGE THIS ASSIGNMENT AFTER IMPLEMENTING LOGIN
-        # form.instance.author = self.request.user
-        form.instance.author = User.objects.first()
+        form.instance.author = self.request.user
 
         # Run the parent class "form_valid" method
         return super().form_valid(form)
