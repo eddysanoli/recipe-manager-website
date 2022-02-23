@@ -13,7 +13,9 @@
     </form>
 
     <!-- Create new ingredient button -->
-    <a type="button" class="btn btn-outline-dark" href="{% url 'ingredient-create' %}"><i class="fa-solid fa-circle-plus"></i> NEW INGREDIENT</a>
+    {% if user.is_authenticated %}
+        <a type="button" class="btn btn-outline-dark" href="{% url 'ingredient-create' %}"><i class="fa-solid fa-circle-plus"></i> NEW INGREDIENT</a>
+    {% endif %}
 
     <div class="ingredient-list">
 

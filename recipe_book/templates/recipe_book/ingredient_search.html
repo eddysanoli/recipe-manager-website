@@ -22,7 +22,9 @@
     </form>
 
     <!-- New Ingredient -->
-    <a type="button" class="btn btn-outline-dark" href="{% url 'ingredient-create' %}"><i class="fa-solid fa-circle-plus"></i> ADD INGREDIENT</a>
+    {% if user.is_authenticated %}
+        <a type="button" class="btn btn-outline-dark" href="{% url 'ingredient-create' %}"><i class="fa-solid fa-circle-plus"></i> ADD INGREDIENT</a>
+    {% endif %}
 
 
     <!-- Ingredient List -->
