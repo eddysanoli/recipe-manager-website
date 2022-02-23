@@ -202,6 +202,28 @@ footer {
     .recipe-details .recipe-header__img img:hover {
       transform: scale(1.05); }
 
+.profile {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start; }
+  .profile__info {
+    padding: 2rem;
+    margin-top: 30px;
+    background-color: #272727;
+    color: white;
+    border-radius: 15px; }
+    .profile__info--data {
+      margin-top: 30px;
+      padding: 0 20px; }
+      .profile__info--data p {
+        color: white; }
+    .profile__info img {
+      width: 300px;
+      aspect-ratio: 1; }
+  .profile form {
+    padding: 2rem;
+    margin: 0 2rem; }
+
 a {
   color: white;
   text-decoration: none; }

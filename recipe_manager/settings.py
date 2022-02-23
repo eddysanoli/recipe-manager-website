@@ -34,6 +34,7 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     'recipe_book.apps.RecipeBookConfig',
+    'users.apps.UsersConfig',
     'sass_processor',
     'crispy_forms',
     "crispy_bootstrap5",

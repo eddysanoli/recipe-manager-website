@@ -1,0 +1,34 @@
+.profile {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    &__info {
+
+        padding: 2rem;
+        margin-top: 30px;
+        background-color: $primary-color;
+        color: set-text-color($primary-color);
+        border-radius: 15px;
+
+        &--data {
+            margin-top: 30px;
+            padding: 0 20px;
+
+            p {color: set-text-color($primary-color);}
+        }
+
+        img {
+            width: 300px;
+            aspect-ratio: 1;
+        }
+
+    }
+
+    form {
+        padding: 2rem;
+        margin: 0 2rem;
+    }
+
+}

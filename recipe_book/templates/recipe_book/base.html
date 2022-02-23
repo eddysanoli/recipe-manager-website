@@ -56,7 +56,11 @@
                 <a href="{% url 'recipe-list' %}" class="menu-nav__link">Recipes</a>
             </li>
             <li class="menu-nav__item">
-                <a href="#" class="menu-nav__link">Login</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'profile' %}" class="menu-nav__link">Profile</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="menu-nav__link">Login</a>
+                {% endif %}
             </li>
         </ul>
     </nav>

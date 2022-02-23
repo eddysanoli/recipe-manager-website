@@ -1,0 +1,14 @@
+<!-- We can extend templates from another app -->
+{% extends "recipe_book/base.html" %}
+
+{% block content %}
+    
+    <h2>You have been logged out</h2>
+
+    <div class="border-top pt-3">
+        <p>
+            <a class="btn btn-outline-dark" href="{% url 'login' %}">Log In</a>
+            <a class="btn btn-outline-dark ml-1" href="{% url 'book-home' %}">Main Page</a>
+        </p>
+    </div>
+{% endblock content %}

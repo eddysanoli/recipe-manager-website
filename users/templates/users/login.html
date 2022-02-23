@@ -1,0 +1,39 @@
+{% extends "recipe_book/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="content-section">
+
+        <!-- User form -->
+        <form method="POST">
+            {% csrf_token %}
+
+            <!-- User Input Fields -->
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Log In</legend>
+                {{ form|crispy }}
+            </fieldset>
+
+            <!-- Submit button -->
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Log In</button>
+            </div>
+        </form>
+
+        <!-- Register Call to Action -->
+        <div class="border-top pt-3">
+
+            <!-- Forgot Password -->
+            <small class="ml-4">
+                <a style="color: black" href="{% url 'password_reset' %}">Forgot your Password?</a>
+            </small>
+
+            <br>
+
+            <!-- Register -->
+            <small>
+                Need an Account? <a style="color: black" class="ml-4" href="{% url 'register' %}">Sign Up</a>
+            </small>
+        </div>
+    </div>
+{% endblock content %}

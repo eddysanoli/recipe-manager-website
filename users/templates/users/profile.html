@@ -1,0 +1,48 @@
+<!-- We can extend templates from another app -->
+{% extends "recipe_book/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <div class="profile">
+
+        <!-- Profile Info -->
+        <div class="profile__info">
+
+            <!-- User Profile Picture -->
+            <img src="{{ user.profile.image.url }}" alt="User Profile" class="rounded-circle account-img">
+
+            <hr>
+
+            <!-- Username and Email -->
+            <div class="profile__info--data">
+                <h2 class="account-heading">{{ user.username }}</h2>
+                <p>{{ user.email }}</p>
+            </div>
+
+        </div>
+
+        <!-- Update Forms -->
+        <!--    - enctype: Used to correctly save the images -->
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- Display the entire form -->
+            <fieldset class="form-group">
+                <h2 class="border-bottom mb-4">Profile Info</h2>
+                
+                <!-- Use the vertical bar to set a filter -->
+                {{ u_form|crispy }}
+                {{ p_form|crispy }}
+            </fieldset>
+
+            <!-- Submit button -->
+            <div class="form-group">
+                <button class="btn btn-outline-dark" type="submit">Update</button>
+                <a class="btn btn-outline-dark" type="button" href="{% url 'logout' %}">Logout</a>
+            </div>
+        </form> 
+
+    </div>
+
+{% endblock content %}

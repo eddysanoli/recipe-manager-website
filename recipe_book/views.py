@@ -46,6 +46,9 @@ class IngredientListView(ListView):
     # Name of the context object passed to the template
     context_object_name = "ingredients"
 
+    # Model result ordering
+    ordering = ['-article_id']
+
     # Send the search term through a POST request to "ingredient-search"
     def post(self, request, *args, **kwargs):
 
@@ -72,6 +75,9 @@ class IngredientSearchListView(ListView):
 
     # Context object name
     context_object_name = 'ingredients'
+
+    # Model result ordering
+    ordering = ['-article_id']
 
     # Send the search term through a POST request to "ingredient-search"
     def post(self, request, *args, **kwargs):
@@ -123,9 +129,7 @@ class IngredientCreateView(CreateView):
     def form_valid(self, form):
 
         # Set the author of the new ingredient
-        # TODO: CHANGE THIS ASSIGNMENT AFTER IMPLEMENTING LOGIN
-        # form.instance.author = self.request.user
-        form.instance.author = User.objects.first()
+        form.instance.author = self.request.user()
 
         # Run the parent class "form_valid" method
         return super().form_valid(form)
@@ -141,7 +145,7 @@ class IngredientCreateView(CreateView):
 # Create and update views will look for a template called:
 #   <app>/<model>_form.html = recipe_book/ingredient_form.html
 
-class IngredientUpdateView(UserPassesTestMixin, UpdateView):
+class IngredientUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     
     # Model sent to the page
     model = Ingredient
@@ -158,9 +162,8 @@ class IngredientUpdateView(UserPassesTestMixin, UpdateView):
     # Overwrite the "form_valid" method of parent class
     def form_valid(self, form):
 
-        # Set author
-        # TODO: Change once the login system has been created
-        form.instance.author = User.objects.first()
+        # Set the author of the new ingredient
+        form.instance.author = self.request.user
 
         # "form_valid" method from the parent class
         return super().form_valid(form)
@@ -184,7 +187,7 @@ class IngredientUpdateView(UserPassesTestMixin, UpdateView):
 # Class based view will look for a template called:
 #   recipe_book/ingredient_confirm_delete.html
 
-class IngredientDeleteView(UserPassesTestMixin, DeleteView):
+class IngredientDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     
     model = Ingredient
 
@@ -240,7 +243,7 @@ class RecipeDetailView(DetailView):
 # Class based view will look for a template called:
 #   recipe_book/recipe_confirm_delete.html
 
-class RecipeDeleteView(DeleteView):
+class RecipeDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     # Model sent to the page
     model = Recipe
@@ -270,7 +273,7 @@ class RecipeDeleteView(DeleteView):
 # Create and update views will look for a template called:
 #   <app>/<model>_form.html = recipe_book/recipe_form.html
 
-class RecipeCreateView(CreateView):
+class RecipeCreateView(LoginRequiredMixin, CreateView):
 
     # Model sent to the page
     model = Recipe
@@ -317,7 +320,7 @@ class RecipeCreateView(CreateView):
 # Create and update views will look for a template called:
 #   <app>/<model>_form.html = recipe_book/recipe_form.html
 
-class RecipeUpdateView(UpdateView):
+class RecipeUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     # Model sent to the page
     model = Recipe
@@ -354,6 +357,19 @@ class RecipeUpdateView(UpdateView):
 
         # Run the parent class "form_valid" method
         return super().form_valid(form)
+
+
+    # Check if the user is the author of the current recipe
+    def test_func(self):
+
+        # Get the current ingredient
+        recipe = self.get_object()
+
+        # If current user == current ingredient author
+        if self.request.user == recipe.author:
+            return True
+        else:
+            return False
 
 
 # =====================
