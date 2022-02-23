@@ -46,11 +46,19 @@ $card-radius: 20px;
             margin: -8% -8% 25px -8%;
 
             small {
+
+                // Take ID label out of the regular flow
                 position: absolute;
+
+                // Flex settings
                 display: flex;
                 justify-content: flex-start;
                 align-items: flex-start;
+
+                // Padding and margin
                 padding: 10px 15px;
+
+                // Font settings
                 font-family: "Montserrat", sans-serif;
                 font-weight: 700;
             }

@@ -20,7 +20,7 @@ import pint
 def home(request):
 
     # Returns an HTTP response under the hood
-    return render(request, 'recipe_book/home.html', context = {
+    return render(request, 'recipe_book/ingredient_list.html', context = {
         'ingredients': Ingredient.objects.all()
     })
 

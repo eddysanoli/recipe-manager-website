@@ -14,7 +14,7 @@
         // Color
         $background-card-color: #7A5A3D;
         color: set-text-color($background-card-color);
-        background-color: $background-card-color;
+        background: linear-gradient(229deg, rgba(199,147,103,1) 0%, rgba(122,91,64,1) 100%);
         box-shadow: 2px 2px 20px 3px rgb(134, 134, 134);
         
         // Shape and size

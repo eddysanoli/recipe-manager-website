@@ -4,52 +4,70 @@
 <!-- NOTE: Context object name = "recipe" -->
 {% block content %}
     
-    <h1>{{ recipe.title }}</h1>
-    <small>{{ recipe.date_posted|date:"F d, Y" }}</small><br>
-    <small>Posted by {{ recipe.author }}</small><br>
-
-    <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
-    <a type="button" class="btn btn-outline-dark" href="{% url 'recipe-delete' recipe.id %}"><i class="fa-solid fa-trash"></i> DELETE</a>
-    <a type="button" class="btn btn-outline-dark" href="{% url 'recipe-update' recipe.id %}"><i class="fas fa-edit"></i> EDIT</a>
-
-
-    <p>{{ recipe.description }}</p>
-
-    <hr>
-
-    <h3>Ingredients</h3>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Ingredient</th>
-                <th scope="col">Amount</th>
-                <th scope="col">Unit</th>
-                <th scope="col">Cost</th>
-            </tr>
-        </thead>
+    <div class="recipe-details">
         
-        <tbody>
-            {% for ingredient in recipe.ingredients %}
+        <div class="recipe-header">
+
+            <!-- Recipe Image -->
+            <div class="recipe-header__img">
+                <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
+            </div>
+
+            <!-- Recipe Data -->
+            <div class="recipe-header__info">
+
+                <!-- Buttons -->
+                <div class="recipe-header__info--btns">
+                    <a type="button" class="btn btn-outline-light" href="{% url 'recipe-delete' recipe.id %}"><i class="fa-solid fa-trash"></i> DELETE</a>
+                    <a type="button" class="btn btn-outline-light" href="{% url 'recipe-update' recipe.id %}"><i class="fas fa-edit"></i> EDIT</a>        
+                </div>
+
+                <!-- Recipe Info -->
+                <div class="recipe-header__info--data">
+                    <h1>{{ recipe.title }}</h1>
+                    <p class="recipe-date">{{ recipe.date_posted|date:"F d, Y" }}</p>
+                    <p class="recipe-user">Posted by {{ recipe.author }}</p>
+                    <p>{{ recipe.description }}</p>
+                </div>
+
+            </div>
+        
+        </div>
+
+        <h3>Ingredients</h3>
+        <table class="table recipe-details__table">
+            <thead>
                 <tr>
-                    <th scope="row">{{ ingredient.article_id }}</th>
-                    <td>{{ ingredient.name }}</td>
-                    <td>{{ ingredient.amount }}</td>
-                    <td>{{ ingredient.unit }}</td>
-                    <td>${{ ingredient.cost }}</td>
+                    <th scope="col">ID</th>
+                    <th scope="col">Ingredient</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Unit</th>
+                    <th scope="col">Cost</th>
                 </tr>
-            {% endfor %}
+            </thead>
+            
+            <tbody>
+                {% for ingredient in recipe.ingredients %}
+                    <tr>
+                        <th scope="row">{{ ingredient.article_id }}</th>
+                        <td>{{ ingredient.name }}</td>
+                        <td>{{ ingredient.amount }}</td>
+                        <td>{{ ingredient.unit }}</td>
+                        <td>${{ ingredient.cost }}</td>
+                    </tr>
+                {% endfor %}
 
-            <tr>
-                <td class="table-active"></td>
-                <td class="table-active"></td>
-                <td class="table-active"></td>
-                <td class="table-active">Total Recipe Cost</td>
-                <td class="table-active">${{ recipe.total_cost }}</td>
-            </tr>
-        </tbody>
-        
-    </table>
+                <tr>
+                    <td class="table-active"></td>
+                    <td class="table-active"></td>
+                    <td class="table-active"></td>
+                    <td class="table-active">Total Recipe Cost</td>
+                    <td class="table-active">${{ recipe.total_cost }}</td>
+                </tr>
+            </tbody>
+            
+        </table>
 
+    </div>
 
 {% endblock %}
