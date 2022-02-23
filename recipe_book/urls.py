@@ -5,6 +5,7 @@ from .views import (
     IngredientCreateView,
     IngredientUpdateView,
     IngredientDeleteView,
+    IngredientSearchListView,
     RecipeListView,
     RecipeCreateView,
     RecipeDeleteView,
@@ -37,6 +38,9 @@ urlpatterns = [
 
     # Update View
     path('ingredients/<int:pk>/delete/', IngredientDeleteView.as_view(), name="ingredient-delete"),
+
+    # Search View
+    path('ingredients/<str:search_term>/search/', IngredientSearchListView.as_view(), name='ingredient-search'),
 
     # =====================
     # RECIPES

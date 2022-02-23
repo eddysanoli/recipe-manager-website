@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
 from django.views.generic import (
     ListView, 
     DetailView, 
@@ -44,6 +45,62 @@ class IngredientListView(ListView):
 
     # Name of the context object passed to the template
     context_object_name = "ingredients"
+
+    # Send the search term through a POST request to "ingredient-search"
+    def post(self, request, *args, **kwargs):
+
+        search_term = request.POST.get('search_term')
+        print(f"[DEBUG] SEARCH TERM: ", search_term)
+        
+        # Reverse returns a string, causing the backend to reject the response
+        # Here we convert the string into a proper response to prevent errors
+        return HttpResponseRedirect(reverse('ingredient-search', kwargs = {
+            'search_term': search_term 
+        }))
+
+# =====================
+# VIEW: INGREDIENT SEARCH
+# =====================
+
+class IngredientSearchListView(ListView):
+
+    # Model sent to the page
+    model = Ingredient
+
+    # Template for the view
+    template_name = 'recipe_book/ingredient_search.html'
+
+    # Context object name
+    context_object_name = 'ingredients'
+
+    # Send the search term through a POST request to "ingredient-search"
+    def post(self, request, *args, **kwargs):
+
+        search_term = request.POST.get('search_term')
+        
+        # Redirect back to this page with the new search term
+        return HttpResponseRedirect(reverse('ingredient-search', kwargs = {
+            'search_term': search_term 
+        }))
+
+    # Filter the model results
+    def get_queryset(self):
+
+        search_term = self.kwargs.get('search_term')
+
+        # Return results that match the article ID
+        # (If search term is convertible to int)
+        if search_term.isdigit():
+            return Ingredient.objects \
+                .filter(article_id__contains = int(search_term)) \
+                .order_by("article_id")
+
+        # Return results that match the ingredient name
+        else:
+            return Ingredient.objects \
+                .filter(name__contains = search_term) \
+                .order_by("article_id")
+                                 
 
 # =====================
 # VIEW: CREATE INGREDIENT
