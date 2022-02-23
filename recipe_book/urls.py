@@ -19,7 +19,7 @@ from .views import (
 urlpatterns = [
     
     # Home View
-    path('', views.home, name="book-home"),
+    path('', IngredientListView.as_view(), name="book-home"),
 
     # About View
     path('about/', views.about, name="book-about"),
